@@ -1,16 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MaterialModule } from './material.module';
+import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { HomeComponent } from './pages/home/home.component';
+import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
-    AppComponent  // declara aquí los componentes que ya no serán standalone
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,  // declara aquí los componentes que ya no serán standalone
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot(routes),
+    MaterialModule,
+    ReactiveFormsModule,
     // Importa otros módulos que necesites (FormsModule, RouterModule, etc.)
   ],
   providers: [
