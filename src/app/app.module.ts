@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './material.module';
@@ -22,6 +22,7 @@ import { routes } from './app.routes';
     RouterModule.forRoot(routes),
     MaterialModule,
     ReactiveFormsModule,
+    FormsModule,
     // Importa otros módulos que necesites (FormsModule, RouterModule, etc.)
   ],
   providers: [
