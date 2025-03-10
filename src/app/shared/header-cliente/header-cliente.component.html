@@ -1,0 +1,62 @@
+<header class="bg-primary text-white p-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <!-- Izquierda: Título -->
+      <div class="header-title col-2">
+        <img src="" alt="Logo" class="img-fluid ms-2" style="max-height: 50px;" routerLink="/">
+      </div>
+  
+      <!-- Centro: Contenedor de las 2 barras de búsqueda en la misma fila -->
+      <div class="header-search d-flex flex-grow-1 mx-3 col-7" style="gap: 1rem;">
+        <!-- Barra de búsqueda con Autocomplete -->
+        <div class="autocomplete-search" style="flex: 1;">
+          <mat-form-field appearance="outline" class="w-100 my-white-form">
+            <mat-label style="color: white;">Buscar (Autocomplete)</mat-label>
+            <input type="text"
+                   matInput
+                   style="color: white;"
+                   [formControl]="autoSearchControl"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+  <!--           <button mat-icon-button matSuffix aria-label="Buscar Autocomplete">
+              <mat-icon>search</mat-icon>
+            </button> -->
+          </mat-form-field>
+        </div>
+  
+        <!-- Barra de búsqueda normal -->
+        <div class="plain-search  d-flex" style="flex: 1;">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label style="color: white;">Escribe para buscar...</mat-label>
+            <input type="text"
+                   matInput
+                   style="color: white;"
+                   [formControl]="plainSearchControl"
+                   placeholder="">
+  
+          </mat-form-field>
+          <button style="color: white; background-color: black;" mat-button matSuffix
+          (click)="obtenerValores()"
+          [disabled]="autoSearchControl.invalid || plainSearchControl.invalid">
+            Buscar
+          </button>
+        </div>
+      </div>
+  
+      <!-- Derecha: Logo y menú -->
+      <div class="header-logo d-flex justify-content-center align-items-center col-3 gap-3">
+
+        <button mat-button [matMenuTriggerFor]="afterMenu" class="text-white" style="background-color: black;">Usuario</button>
+        <mat-menu #afterMenu="matMenu" xPosition="after">
+          <button mat-menu-item>Mis Contrataciones</button>
+          <button mat-menu-item>Mi Perfil</button>
+          <button mat-menu-item>Cerrar Sesion</button>
+        </mat-menu>
+        <!-- Reemplaza "ruta_del_logo.png" con la ruta real de tu logo -->
+      </div>
+    </div>
+  </header>
+  

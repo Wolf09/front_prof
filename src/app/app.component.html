@@ -1,4 +1,20 @@
-<app-header></app-header>
+<!-- Mostrar el header según el tipo de usuario -->
+<ng-container *ngIf="userType === 'Cliente'">
+  <app-header-cliente></app-header-cliente>
+</ng-container>
+
+<ng-container *ngIf="userType === 'Empresa'">
+  <app-header-empresa></app-header-empresa>
+</ng-container>
+
+<ng-container *ngIf="userType === 'Independiente'">
+  <app-header-independiente></app-header-independiente>
+</ng-container>
+<ng-container *ngIf="userType === 'Desconocido'">
+  <app-header></app-header>
+</ng-container>
+
+<!-- <app-header></app-header> -->
 
 <div class="container my-4">
   <!-- Aquí se cargarán las rutas o el contenido principal -->

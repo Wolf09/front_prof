@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 
@@ -19,6 +20,10 @@ export class HeaderComponent implements OnInit {
 
   // Opciones filtradas (observable)
   filteredOptions!: Observable<string[]>;
+
+  constructor(private router:Router){
+
+  }
 
   ngOnInit() {
     this.filteredOptions = this.autoSearchControl.valueChanges.pipe(
@@ -40,5 +45,7 @@ export class HeaderComponent implements OnInit {
       option.toLowerCase().includes(filterValue)
     );
   }
+
+
 }
 

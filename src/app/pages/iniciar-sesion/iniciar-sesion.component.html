@@ -1,0 +1,18 @@
+<div class="d-flex flex-column align-items-center">
+  <img src="assets/user.jpg" alt="Usuario" class="rounded-circle mb-3" style="width: 300px; height: 300px;">
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" style="width: 50%; height: 600px;">
+    <div class="mb-3">
+      <label for="correo" class="form-label">Correo</label>
+      <input id="correo" formControlName="correo" type="email" class="form-control">
+    </div>
+    
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input id="password" formControlName="password" type="password" class="form-control">
+    </div>
+    
+    <button type="submit" class="btn btn-primary mt-3">Iniciar Sesión</button>
+  </form>
+</div>
+
+

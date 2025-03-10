@@ -2,3 +2,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-autocomplete-panel {
+    z-index: 9999 !important;
+  }
+  .custom-dialog-container {
+    padding: 0 !important; /* O ajusta el valor según necesites */
+    margin: 0 !important;
+  }
+  
+  .full-width {
+    width: 100% !important;
+  }
+
+  
+  
+  
+  
+  
+  

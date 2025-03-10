@@ -1,0 +1,48 @@
+<!-- modal-content.component.html -->
+<div class="modal-header" *ngIf="!trabajo">
+  <h4 class="modal-title">Nuevo Trabajo</h4>
+  <button type="button" class="close" aria-label="Close" (click)="onCancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-header" *ngIf="trabajo">
+  <h4 class="modal-title">Actualizar Trabajo</h4>
+  <button type="button" class="close" aria-label="Close" (click)="onCancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="nuevoForm">
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" class="form-control" formControlName="descripcion" rows="4"></textarea>
+      <div *ngIf="nuevoForm.get('descripcion')!.invalid && nuevoForm.get('descripcion')!.touched" class="text-danger">
+        La descripción es requerida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="descripcionCorta">Descripción Corta</label>
+      <input id="descripcionCorta" type="text" class="form-control" formControlName="descripcionCorta" />
+      <div *ngIf="nuevoForm.get('descripcionCorta')!.invalid && nuevoForm.get('descripcionCorta')!.touched" class="text-danger">
+        La descripción corta es requerida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="precio">Precio</label>
+      <input id="precio" type="number" class="form-control" formControlName="precio" />
+      <div *ngIf="nuevoForm.get('precio')!.invalid && nuevoForm.get('precio')!.touched" class="text-danger">
+        El precio es requerido y debe ser un número.
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+  <button type="button" class="btn btn-primary" (click)="onSubmit()">Guardar</button>
+</div>
+
+

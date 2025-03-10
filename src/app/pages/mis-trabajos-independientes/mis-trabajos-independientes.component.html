@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-auto">
+    <h2>Mis Trabajos</h2>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-auto">
+    <button mat-button class="text-white" style="background-color: black;" (click)="agregarTrabajoIndependiente()">
+      Nuevo
+    </button>
+  </div>
+</div>
+
+<div class="row">
+
+    <mat-card class="example-card" appearance="outlined">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{res1?.profesion}} {{res1?.nombres}} {{res1?.apellidos}}</mat-card-title>
+        <mat-card-subtitle>{{res1?.cartaPresentacion}}</mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="d-flex flex-row">
+        <p class="ms-3">
+          Misión: {{res1?.mision}}
+        </p>
+        <p class="ms-3">
+          Visión: {{res1?.vision}}
+          </p>
+          <p class="ms-3">
+            País: {{res1?.pais}}
+          </p>
+          <p class="ms-3">
+            Ciudad: {{res1?.ciudad}}  
+          </p>
+          <p class="ms-3">
+            Área de Trabajo: {{res1?.areaTrabajo}}
+          </p>
+          <p class="ms-3">
+            Fecha de Creación: {{ res1?.fechaCreacion | date:'dd/MM/yyyy HH:mm:ss' }}              
+         </p>         
+        </div>
+      </mat-card-content>
+    
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+      
+    </mat-card>
+</div>
+<div class="row">
+  <mat-card *ngFor="let item of res" class="example-card" appearance="outlined">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Área de trabajo: {{ item.areaTrabajo }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="d-flex flex-row">
+        <img mat-card-image [src]="item.fotoTitulo"  
+    class="tamano-imagen" alt="">
+    <div class="ms-3 d-flex flex-column">
+        <p class="ms-3" hidden>
+          {{ item.idTrabIndependiente }}
+        </p>
+        <p class="ms-3">
+          Descripción corta: {{ item.descripcionCorta }}
+        </p>
+        <p class="ms-3">
+          Descripción larga: {{ item.descripcion }}
+        </p>
+        <p class="ms-3">
+          Calificación promedio: {{ item.averageRating }}
+        </p>
+        <p class="ms-3">
+          Precio: {{ item.precio }}
+        </p>
+        <p class="ms-3">
+          Ventas: {{ item.ventas }}
+        </p>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="actualizarTrabajoIndependiente(item)">Editar</button>
+      <button mat-button (click)="confirmarEliminarTrabajo(item.idTrabIndependiente)">Eliminar</button>
+      <button mat-button>Trabajos Realizados</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

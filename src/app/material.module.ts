@@ -9,6 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
+
 // Importa otros módulos de Angular Material según los necesites
 
 @NgModule({
@@ -21,6 +23,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatInputModule,
     MatAutocompleteModule,
     MatRadioModule,
+    MatDialogModule
     // Otros módulos
   ],
   exports: [
@@ -32,6 +35,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatInputModule,
     MatAutocompleteModule,
     MatRadioModule,
+    MatDialogModule
     // Otros módulos
   ]
 })

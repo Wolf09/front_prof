@@ -1,1 +1,4 @@
-
+:host ::ng-deep .mat-autocomplete-panel {
+    z-index: 9999 !important;
+  }
+  

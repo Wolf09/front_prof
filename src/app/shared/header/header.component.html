@@ -1,12 +1,12 @@
-<header class="bg-primary text-white p-3">
+<header class="sticky-top bg-primary text-white p-3">
   <div class="container d-flex justify-content-between align-items-center">
     <!-- Izquierda: Título -->
     <div class="header-title col-2">
-      <h3 class="m-0">Mi Aplicación</h3>
+      <img src="" alt="Logo" class="img-fluid ms-2" style="max-height: 50px;" routerLink="/">
     </div>
 
     <!-- Centro: Contenedor de las 2 barras de búsqueda en la misma fila -->
-    <div class="header-search d-flex flex-grow-1 mx-3 col-8" style="gap: 1rem;">
+    <div class="header-search d-flex flex-grow-1 mx-3 col-7" style="gap: 1rem;">
       <!-- Barra de búsqueda con Autocomplete -->
       <div class="autocomplete-search" style="flex: 1;">
         <mat-form-field appearance="outline" class="w-100 my-white-form">
@@ -16,7 +16,8 @@
                  style="color: white;"
                  [formControl]="autoSearchControl"
                  [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete">
+                 <!-- TODO: el autocomplete no se sobrepone encima del header azul -->
+          <mat-autocomplete #auto="matAutocomplete" style="z-index: 9999 !important;">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
               {{ option }}
             </mat-option>
@@ -47,14 +48,14 @@
     </div>
 
     <!-- Derecha: Logo y menú -->
-    <div class="header-logo d-flex align-items-center col-2">
-      <button mat-button [matMenuTriggerFor]="afterMenu" class="text-white" style="background-color: black;">After</button>
-      <mat-menu #afterMenu="matMenu" xPosition="after">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
-      </mat-menu>
-      <!-- Reemplaza "ruta_del_logo.png" con la ruta real de tu logo -->
-      <img src="ruta_del_logo.png" alt="Logo" class="img-fluid ms-2" style="max-height: 50px;">
+    <div class="header-logo d-flex justify-content-center align-items-center col-3 gap-3">
+      <button mat-button class="text-white" style="background-color: black;" routerLink="/iniciar-sesion">
+        Ingresar
+      </button>
+      <button mat-button class="text-white" style="background-color: black;" routerLink="/registro">
+        Registrarse
+      </button>
     </div>
+    
   </div>
 </header>
