@@ -28,12 +28,22 @@
       </div>
     
       <div class="mb-3">
-        <label for="celular" class="form-label">Celular</label>
-        <input id="celular" formControlName="celular" type="text" class="form-control">
-        <div class="text-danger" *ngIf="registroForm.get('celular')?.invalid && registroForm.get('celular')?.touched">
+        <label class="form-label">Celular</label>
+        <div class="input-group">
+          <select formControlName="paisCelular" class="form-select">
+            <option value="" disabled selected>Seleccione un país</option>
+            <option *ngFor="let pais of misPaises" [value]="pais">
+              {{ '(' + countryCodes[pais] + ') ' + pais }}
+            </option>
+          </select>          
+          <input formControlName="celular" type="text" class="form-control" placeholder="Número de celular">
+        </div>
+        <div *ngIf="registroForm.get('celular')?.invalid && registroForm.get('celular')?.touched" class="text-danger">
           {{ getErrorMessage('celular') }}
         </div>
       </div>
+      
+      
     
       <div class="mb-3">
         <label for="correo" class="form-label">Correo</label>
@@ -77,6 +87,15 @@
           {{ getErrorMessage('ciudad') }}
         </div>
       </div>
+
+      <div class="mb-3">
+        <label for="direccion" class="form-label">Dirección</label>
+        <input id="direccion" formControlName="direccion" type="text" class="form-control">
+        <div class="text-danger" *ngIf="registroForm.get('direccion')?.invalid && registroForm.get('direccion')?.touched">
+          {{ getErrorMessage('direccion') }}
+        </div>
+      </div>
+
     
       <!-- Campos extendidos: se muestran solo si el tipo de usuario NO es Cliente -->
       <div *ngIf="registroForm.get('tipoUsuario')?.value !== 'Cliente'">
@@ -86,6 +105,14 @@
                  (change)="onFileSelected($event, 'fotoRepresentante')">
                  <div *ngIf="registroForm.get('fotoRepresentante')!.invalid && registroForm.get('fotoRepresentante')!.touched" class="text-danger">
                   {{ getErrorMessage('fotoRepresentante') }}
+                </div>
+        </div>
+        <div class="mb-3">
+          <label for="fotoTitulo" class="form-label">Foto del Logo</label>
+          <input id="fotoTitulo" type="file" class="form-control"
+                 (change)="onFileSelected($event, 'fotoTitulo')">
+                 <div *ngIf="registroForm.get('fotoTitulo')!.invalid && registroForm.get('fotoTitulo')!.touched" class="text-danger">
+                  {{ getErrorMessage('fotoTitulo') }}
                 </div>
         </div>
     
@@ -133,25 +160,17 @@
     
         <div *ngIf="registroForm.get('tipoUsuario')?.value == 'Independiente'">
         <div class="mb-3">
-          <label for="profesion" class="form-label">Profesión (para Independiente)</label>
+          <label for="profesion" class="form-label">Profesión</label>
           <input id="profesion" formControlName="profesion" type="text" class="form-control">
           <div *ngIf="registroForm.get('profesion')!.invalid && registroForm.get('profesion')!.touched" class="text-danger">
             {{ getErrorMessage('profesion') }}
           </div>
         </div>
     
-        <div class="mb-3">
-          <label for="fotoTitulo" class="form-label">Foto de Título (para Independiente)</label>
-          <input id="fotoTitulo" type="file" class="form-control"
-                 (change)="onFileSelected($event, 'fotoTitulo')">
-                 <div *ngIf="registroForm.get('fotoTitulo')!.invalid && registroForm.get('fotoTitulo')!.touched" class="text-danger">
-                  {{ getErrorMessage('fotoTitulo') }}
-                </div>
-        </div>
       </div>
       <div *ngIf="registroForm.get('tipoUsuario')?.value == 'Empresa'">
         <div class="mb-3">
-          <label for="nombreEmpresa" class="form-label">Nombre de Empresa (para Empresa)</label>
+          <label for="nombreEmpresa" class="form-label">Nombre de Empresa</label>
           <input id="nombreEmpresa" formControlName="nombreEmpresa" type="text" class="form-control">
           <div *ngIf="registroForm.get('nombreEmpresa')!.invalid && registroForm.get('nombreEmpresa')!.touched" class="text-danger">
             {{ getErrorMessage('nombreEmpresa') }}
@@ -159,7 +178,7 @@
         </div>
     
         <div class="mb-3">
-          <label for="registroDeEmpresa" class="form-label">Registro de Empresa (para Empresa)</label>
+          <label for="registroDeEmpresa" class="form-label">Registro de Empresa</label>
           <input id="registroDeEmpresa" type="file" class="form-control"
                  (change)="onFileSelected($event, 'registroDeEmpresa')">
                  <div *ngIf="registroForm.get('registroDeEmpresa')!.invalid && registroForm.get('registroDeEmpresa')!.touched" class="text-danger">
@@ -168,7 +187,7 @@
         </div>
     
         <div class="mb-3">
-          <label for="licenciaComercial" class="form-label">Licencia Comercial (para Empresa)</label>
+          <label for="licenciaComercial" class="form-label">Licencia Comercial</label>
           <input id="licenciaComercial" type="file" class="form-control"
                  (change)="onFileSelected($event, 'licenciaComercial')">
                  <div *ngIf="registroForm.get('licenciaComercial')!.invalid && registroForm.get('licenciaComercial')!.touched" class="text-danger">

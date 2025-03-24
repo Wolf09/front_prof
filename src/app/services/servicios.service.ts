@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
@@ -47,6 +47,23 @@ export class ServiciosService {
     const url = `${this.baseUrl}/trabajo-independiente/eliminar/${id}`;
     return this.http.post(url,{});
   }
+
+  postCrearTrabajoEmpresa(id: any,data: any): Observable<any>{
+    const url = `${this.baseUrl}/trabajo-empresa/crear/${id}`;
+    return this.http.post(url,data);
+  }
+
+  putActualizarTrabajoEmpresa(id: any,data: any): Observable<any>{
+    const url = `${this.baseUrl}/trabajo-empresa/actualizar/${id}`;
+    return this.http.put(url,data);
+  }
+  postEliminarTrabajoEmpresa(id: any): Observable<any>{
+    const url = `${this.baseUrl}/trabajo-empresa/eliminar/${id}`;
+    return this.http.post(url,{});
+  }
+
+
+  // subir IMAGEN
   uploadFile(file: File): Observable<string> {
     const formData = new FormData();
     formData.append('file', file);
@@ -64,6 +81,55 @@ export class ServiciosService {
   getMisTrabajosIndependientes(id: number): Observable<any[]>{
     const url = `${this.baseUrl}/independiente/mistrabajos/${id}`;
     return this.http.get<any[]>(url);
+  }
+
+  getMisTrabajosEmpresas(id: number): Observable<any[]>{
+    const url = `${this.baseUrl}/empresa/mistrabajos/${id}`;
+    return this.http.get<any[]>(url);
+  }
+
+  getmisTrabajosEmpresasEnAccion(id:any): Observable<any[]>{
+    const url = `${this.baseUrl}/trabajo-empresa/mis-trabajos-en-accion/${id}`;
+    return this.http.get<any[]>(url);
+  }
+
+  postEliminarTrabajoEmpresaEnAccion(id:any){
+    const url = `${this.baseUrl}/trabajo-emp-en-accion/eliminar/${id}`;
+    return this.http.post(url, {});
+  }
+
+  getmisTrabajosIndependientesEnAccion(id:any): Observable<any[]>{
+    const url = `${this.baseUrl}/trabajo-independiente/mis-trabajos-en-accion/${id}`;
+    return this.http.get<any[]>(url);
+  }
+
+  postEliminarTrabajoIndependienteEnAccion(id:any){
+    const url = `${this.baseUrl}/trabajo-ind-en-accion/eliminar/${id}`;
+    return this.http.post(url, {});
+  }
+
+  getFiltrosIndependientes(pais:string,ciudad:string,descripcion: string, filtro: string, calificacion: string): Observable<any[]> {
+    let params = new HttpParams()
+      .set('pais',pais)
+      .set('ciudad',ciudad)
+      .set('descripcion', descripcion)
+      .set('filtro', filtro)
+      .set('calificacion', calificacion);
+      
+    const url = `${this.baseUrl}/clientes/filtroConsultasIndependientes`;
+    return this.http.get<any[]>(url, { params });
+  }
+
+  getFiltrosEmpresas(pais:string,ciudad:string,descripcion: string, filtro: string, calificacion: string): Observable<any[]> {
+    let params = new HttpParams()
+      .set('pais',pais)
+      .set('ciudad',ciudad)
+      .set('descripcion', descripcion)
+      .set('filtro', filtro)
+      .set('calificacion', calificacion);
+      
+    const url = `${this.baseUrl}/clientes/filtroConsultasEmpresas`;
+    return this.http.get<any[]>(url, { params });
   }
 
   getTipoUsuarioFromToken(): string | null {
@@ -102,6 +168,19 @@ export class ServiciosService {
       this.userTypeSubject.next('Desconocido');
     }
   }
+
+  actualizarEstadoTrabajoEnAccion(id: any, estadoTrabajo: any){
+    const url = `${this.baseUrl}/trabajo-emp-en-accion/actualizar-estadotrabajoenaccion/${id}/${estadoTrabajo}`;
+    return this.http.put(url,{});
+
+  }
+
+  actualizarIndEstadoTrabajoEnAccion(id: any, estadoTrabajo:any){
+    const url = `${this.baseUrl}/trabajo-ind-en-accion/actualizar-estadotrabajoenaccion/${id}/${estadoTrabajo}`;
+    return this.http.put(url,{});
+  }
+
+
 
 
 

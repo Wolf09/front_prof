@@ -21,6 +21,10 @@ import { MisTrabajosIndependientesComponent } from './pages/mis-trabajos-indepen
 import { AgregaTrabajoIndependienteComponent } from './popups/agrega-trabajo-independiente/agrega-trabajo-independiente.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { MisTrabajosEmpresasComponent } from './pages/mis-trabajos-empresas/mis-trabajos-empresas.component';
+import { AgregaTrabajoEmpresaComponent } from './popups/agrega-trabajo-empresa/agrega-trabajo-empresa.component';
+import { MisTrabajosEmpresasEnAccionComponent } from './pages/mis-trabajos-empresas-en-accion/mis-trabajos-empresas-en-accion.component';
+import { MisTrabajosIndependientesEnAccionComponent } from './pages/mis-trabajos-independientes-en-accion/mis-trabajos-independientes-en-accion.component';
 
 
 @NgModule({
@@ -37,6 +41,10 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     SuccessDialogComponent,
     MisTrabajosIndependientesComponent,
     AgregaTrabajoIndependienteComponent,
+    MisTrabajosEmpresasComponent,
+    AgregaTrabajoEmpresaComponent,
+    MisTrabajosEmpresasEnAccionComponent,
+    MisTrabajosIndependientesEnAccionComponent,
   ],
   imports: [
     BrowserModule,

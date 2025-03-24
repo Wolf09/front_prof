@@ -6,48 +6,60 @@
       </div>
   
       <!-- Centro: Contenedor de las 2 barras de búsqueda en la misma fila -->
-      <div class="header-search d-flex flex-grow-1 mx-3 col-7" style="gap: 1rem;">
-        <!-- Barra de búsqueda con Autocomplete -->
-        <div class="autocomplete-search" style="flex: 1;">
-          <mat-form-field appearance="outline" class="w-100 my-white-form">
-            <mat-label style="color: white;">Buscar (Autocomplete)</mat-label>
-            <input type="text"
-                   matInput
-                   style="color: white;"
-                   [formControl]="autoSearchControl"
-                   [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{ option }}
-              </mat-option>
-            </mat-autocomplete>
-  <!--           <button mat-icon-button matSuffix aria-label="Buscar Autocomplete">
-              <mat-icon>search</mat-icon>
-            </button> -->
-          </mat-form-field>
-        </div>
-  
-        <!-- Barra de búsqueda normal -->
-        <div class="plain-search  d-flex" style="flex: 1;">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label style="color: white;">Escribe para buscar...</mat-label>
-            <input type="text"
-                   matInput
-                   style="color: white;"
-                   [formControl]="plainSearchControl"
-                   placeholder="">
-  
-          </mat-form-field>
-          <button style="color: white; background-color: black;" mat-button matSuffix
-          (click)="obtenerValores()"
-          [disabled]="autoSearchControl.invalid || plainSearchControl.invalid">
-            Buscar
-          </button>
-        </div>
+      <div class="header-search col-8" style="background-color: white; color: black; padding: 1rem;">
+        <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+          <!-- Fila 1: País y Ciudad en la misma línea -->
+          <div class="row align-items-end">
+            <!-- Columna para País -->
+            <div class="col-md-4">
+              <mat-form-field appearance="outline" class="w-100 campo-blanco">
+                <mat-label>País</mat-label>
+                <!-- Usa matNativeControl para el <select> nativo -->
+                <select matNativeControl formControlName="pais">
+                  <option value="" disabled>Seleccione un país</option>
+                  <option *ngFor="let pais of misPaises" [value]="pais">{{ pais }}</option>
+                </select>
+              </mat-form-field>
+            </div>
+            <!-- Columna para Ciudad -->
+            <div class="col-md-8">
+              <mat-form-field appearance="outline" class="w-100 campo-blanco">
+                <mat-label>Ciudad</mat-label>
+                <input matInput formControlName="ciudad" [matAutocomplete]="autoCiudad">
+                <mat-autocomplete #autoCiudad="matAutocomplete">
+                  <mat-option *ngFor="let ciudad of ciudadesFiltradas | async" [value]="ciudad">
+                    {{ ciudad }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+          
+      
+          <!-- Fila 2: Buscador -->
+          <div class="row mt-3">
+            <div class="col">
+              <mat-form-field appearance="outline" class="w-100 campo-blanco">
+                <mat-label>Escribe para buscar...</mat-label>
+                <input matInput type="text" formControlName="buscador" placeholder="">
+              </mat-form-field>
+            </div>
+          </div>
+      
+          <!-- Fila 3: Botón Buscar -->
+          <div class="row mt-3">
+            <div class="col">
+              <button type="submit" class="btn btn-primary" [disabled]="registroForm.invalid">
+                Buscar
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
+      
   
       <!-- Derecha: Logo y menú -->
-      <div class="header-logo d-flex justify-content-center align-items-center col-3 gap-3">
+      <div class="header-logo d-flex justify-content-center align-items-center col-2 gap-3">
 
         <button mat-button [matMenuTriggerFor]="afterMenu" class="text-white" style="background-color: black;">Usuario</button>
         <mat-menu #afterMenu="matMenu" xPosition="after">

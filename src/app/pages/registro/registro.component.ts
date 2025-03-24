@@ -20,6 +20,31 @@ export class RegistroComponent implements OnInit {
   ciudadesFiltradas!: Observable<string[]>;
   misPaises: string[]=paises;
 
+  countryCodes: { [key: string]: string } = {
+    'Argentina': '54',
+    'Bolivia': '591',
+    'Brasil': '55',
+    'Chile': '56',
+    'Colombia': '57',
+    'Costa Rica': '506',
+    'Cuba': '53',
+    'República Dominicana': '1',
+    'Ecuador': '593',
+    'El Salvador': '503',
+    'Guatemala': '502',
+    'Honduras': '504',
+    'México': '52',
+    'Nicaragua': '505',
+    'Panamá': '507',
+    'Paraguay': '595',
+    'Perú': '51',
+    'Uruguay': '598',
+    'Venezuela': '58',
+    'Estados Unidos': '1',
+    'Rusia': '7',
+    'China': '86'
+  };
+
   constructor(private fb: FormBuilder, 
     private serviciosService: ServiciosService,
     private dialog:MatDialog,
@@ -32,7 +57,8 @@ export class RegistroComponent implements OnInit {
       tipoUsuario: ['Cliente', Validators.required],
       nombres: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]],
       apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]],
-      celular: ['', [Validators.required, Validators.pattern('^(1|[5-9][0-9]{2})\\d{7,10}$')]],
+      paisCelular: ['', Validators.required],
+      celular: ['', [Validators.required, Validators.pattern(/^\d{7,10}$/)]],
       correo: ['', [Validators.required, Validators.email]],
       password: ['', [
         Validators.required, 
@@ -42,6 +68,7 @@ export class RegistroComponent implements OnInit {
       ]],
       pais: ['', Validators.required],
       ciudad: ['', Validators.required],
+      direccion: [''],
       // Campos extendidos (para Empresa o Independiente)
       fotoRepresentante: [''],
       cartaPresentacion: [''],
@@ -76,7 +103,7 @@ export class RegistroComponent implements OnInit {
     [
       'fotoRepresentante', 'cartaPresentacion', 'mision', 'vision',
       'dniAnverso', 'dniReverso', 'profesion', 'fotoTitulo',
-      'nombreEmpresa', 'registroDeEmpresa', 'licenciaComercial', 'areaTrabajo'
+      'nombreEmpresa', 'registroDeEmpresa', 'licenciaComercial', 'areaTrabajo', 'celular'
     ].forEach(field => {
       this.registroForm.get(field)?.clearValidators();
     });
@@ -155,6 +182,12 @@ private _filterCiudades(value: string, pais: string): string[] {
           const dataToSend = { ...this.registroForm.value };
           const tipoUsuario = dataToSend.tipoUsuario;
 
+          // Concatenar el código de país con el número de celular
+          const paisSeleccionado = dataToSend.paisCelular;
+          const codigoPais = this.countryCodes[paisSeleccionado] || '';
+          dataToSend.celular = codigoPais + dataToSend.celular;
+          // Opcional: eliminar el campo paisCelular si no es necesario en el backend
+          delete dataToSend.paisCelular;
       
           console.log('Datos a enviar:', dataToSend);
       

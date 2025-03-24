@@ -1,3 +1,4 @@
+
 <div class="row">
 <div class="col-3">
     <div class="card">
@@ -8,9 +9,9 @@
         <!-- Filtro de ordenamiento -->
         <h5>Ordenar por:</h5>
         <mat-radio-group [(ngModel)]="orderFilter" aria-label="Ordenar por">
-          <mat-radio-button value="bestSeller">Más vendido</mat-radio-button><br>
-          <mat-radio-button value="priceAsc">Precio de venta: Ascendente</mat-radio-button><br>
-          <mat-radio-button value="priceDesc">Precio de venta: Descendente</mat-radio-button>
+          <mat-radio-button value="ventas" selected>Más vendido</mat-radio-button><br>
+          <mat-radio-button value="asc">Precio de venta: Ascendente</mat-radio-button><br>
+          <mat-radio-button value="desc">Precio de venta: Descendente</mat-radio-button>
         </mat-radio-group>
   
         <hr>
@@ -43,37 +44,108 @@
           
         <hr>
   
-        <button class="btn btn-primary">Aplicar filtros</button>
+        <button class="btn btn-primary" (click)="aplicarFiltro(orderFilter,ratingFilter)">Aplicar filtros</button>
       </div>
     </div>
 </div>
-  
-<div class="col-9">
+<div class="col-9" *ngIf="bandera">
+  <h4>No hay Datos a Mostrar con el criterio de Búsqueda</h4>
+</div>
+<div class="col-9" *ngIf="!bandera">
 
-  <mat-card class="example-card" appearance="outlined">
+  <div class="row">
+  <mat-card class="example-card" appearance="outlined" *ngFor="let item of resEmp">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      <mat-card-title>Nombre: {{item.nombreEmpresa}}</mat-card-title>
+      <mat-card-subtitle>Área de Trabajo: {{item.areaTrabajo}}</mat-card-subtitle>
     </mat-card-header>
     
     <mat-card-content>
       <div class="d-flex flex-row">
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" 
-    class="tamano-imagen" alt="Photo of a Shiba Inu">
+      <img mat-card-image [src]="item.fotoRepresentante" 
+    class="tamano-imagen" alt="Foto del Logo">
+    <p hidden>
+      {{item.idEmpresa}}
+    </p>
+    <p hidden>
+      {{item.idTrabajoEmp}}
+    </p>
       <p class="ms-3">
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
+        Descripción: {{item.descripcion}}
+      </p>
+      <p class="ms-3">
+        Pais: {{item.pais}}
+      </p>
+      <p class="ms-3">
+        Ciudad: {{item.ciudad}}
+      </p>
+      <p>
+        Calificación: {{item.averageRating}}
+      </p>
+      <p>
+        Precio: {{item.precio}}
+      </p>
+      <p>
+        Ventas: {{item.ventas}}
       </p>
       </div>
     </mat-card-content>
   
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+      <button mat-button>Trabajos Realizados</button>
     </mat-card-actions>
     
   </mat-card>
+  </div>
+
+
+  <div class="row">
+    <mat-card class="example-card" appearance="outlined" *ngFor="let item of resInd">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{item.profesion}}: {{item.nombres}} {{item.apellidos}}</mat-card-title>
+        <mat-card-subtitle>Área de Trabajo: {{item.areaTrabajo}}</mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="d-flex flex-row">
+        <img mat-card-image [src]="item.fotoRepresentante" 
+      class="tamano-imagen" alt="Foto del Logo">
+      <p hidden>
+        {{item.idIndependiente}}
+      </p>
+      <p hidden>
+        {{item.idTrabajoInd}}
+      </p>
+        <p class="ms-3">
+          Descripción: {{item.descripcion}}
+        </p>
+        <p class="ms-3">
+          Pais: {{item.pais}}
+        </p>
+        <p class="ms-3">
+          Ciudad: {{item.ciudad}}
+        </p>
+        <p>
+          Calificación: {{item.averageRating}}
+        </p>
+        <p>
+          Precio: {{item.precio}}
+        </p>
+        <p>
+          Ventas: {{item.ventas}}
+        </p>
+        </div>
+      </mat-card-content>
+    
+      <mat-card-actions>
+        <button mat-button>Trabajos Realizados</button>
+      </mat-card-actions>
+      
+    </mat-card>
+
+
+  </div>
  </div>
 </div>

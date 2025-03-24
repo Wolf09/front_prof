@@ -6,9 +6,14 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
+  
+
   constructor(private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
+    if (req.url.includes('/auth/login') || req.url.includes('/auth/registro') || req.url.includes('/auth/confirmar-cuenta')) {
+      return next.handle(req);
+    }
     const token = localStorage.getItem('token');
 
     let authReq = req;

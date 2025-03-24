@@ -7,40 +7,21 @@
   
       <!-- Centro: Contenedor de las 2 barras de búsqueda en la misma fila -->
       <div class="header-search d-flex flex-grow-1 mx-3 col-7" style="gap: 1rem;">
-        <!-- Barra de búsqueda con Autocomplete -->
-        <div class="autocomplete-search" style="flex: 1;">
-          <mat-form-field appearance="outline" class="w-100 my-white-form">
-            <mat-label style="color: white;">Buscar (Autocomplete)</mat-label>
-            <input type="text"
-                   matInput
-                   style="color: white;"
-                   [formControl]="autoSearchControl"
-                   [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{ option }}
-              </mat-option>
-            </mat-autocomplete>
-  <!--           <button mat-icon-button matSuffix aria-label="Buscar Autocomplete">
-              <mat-icon>search</mat-icon>
-            </button> -->
-          </mat-form-field>
-        </div>
   
         <!-- Barra de búsqueda normal -->
         <div class="plain-search  d-flex" style="flex: 1;">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label style="color: white;">Escribe para buscar...</mat-label>
+            <mat-label style="color: black;">Escribe para buscar...</mat-label>
             <input type="text"
                    matInput
-                   style="color: white;"
+                   style="color: black;"
                    [formControl]="plainSearchControl"
                    placeholder="">
   
           </mat-form-field>
           <button style="color: white; background-color: black;" mat-button matSuffix
           (click)="obtenerValores()"
-          [disabled]="autoSearchControl.invalid || plainSearchControl.invalid">
+          [disabled]="plainSearchControl.invalid">
             Buscar
           </button>
         </div>
@@ -51,7 +32,7 @@
 
         <button mat-button [matMenuTriggerFor]="afterMenu" class="text-white" style="background-color: black;">Usuario</button>
         <mat-menu #afterMenu="matMenu" xPosition="after">
-          <button mat-menu-item>Mis Trabajos</button>
+          <button mat-menu-item (click)="misTrabajos()">Mis Trabajos</button>
           <button mat-menu-item>Mis Pagos</button>
           <button mat-menu-item>Mi Perfil</button>
           <button mat-menu-item>Cerrar Sesion</button>

@@ -91,7 +91,15 @@ export class MisTrabajosIndependientesComponent implements OnInit{
           error: (err) => console.error(err)
         });
       }
+
+
+      encodeText(text: string): string {
+        return encodeURIComponent(text);
+      }
   
+      trabajosRealizados(id: any){
+        this.router.navigate(['/mis-trabajos-independientes-en-accion',id]);
+      }
 
 
 

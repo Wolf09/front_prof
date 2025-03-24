@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-auto">
+      <h2>Mis Trabajos Realizados con su estado Actual</h2>
+    </div>
+  
+</div>
+<div class="row">
+    <mat-card *ngFor="let item of res" class="example-card" appearance="outlined" style="margin-bottom: 16px;">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{item.descripcionCorta}}</mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+
+      <div class="ms-3 d-flex flex-column">
+          <p class="ms-3" hidden>
+            {{ item.idTrabEmpresa }}
+          </p>
+          <p class="ms-3" hidden>
+            {{ item.idEmpresaEnAccion }}
+          </p>
+          <p class="ms-3">
+            Descripción larga: {{ item.descripcion }}
+          </p>
+          <p class="ms-3">
+            Precio: {{ item.precio }}
+          </p>
+          <p class="ms-3">
+            Estado: {{ item.estadoTrabajo }}
+          </p>
+          </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="d-flex align-items-center">        
+          <mat-form-field appearance="fill" style="width: 150px; margin-right: 8px;">
+            <mat-label>Cambiar Estado</mat-label>
+            <mat-select (selectionChange)="cambiarEstado($event.value,item.idEmpresaEnAccion)">
+              <mat-option *ngFor="let estado of estados" [value]="estado">
+                {{ estado }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+                  
+          <button mat-button color="warn" (click)="eliminar(item.idEmpresaEnAccion)">
+            Eliminar
+          </button>
+        </div>
+      </mat-card-actions>
+      
+    </mat-card>
+    
+  </div>

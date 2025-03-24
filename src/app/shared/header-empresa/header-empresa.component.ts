@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { map, Observable, startWith } from 'rxjs';
 
 @Component({
@@ -10,7 +12,6 @@ import { map, Observable, startWith } from 'rxjs';
 })
 export class HeaderEmpresaComponent {
 
-  autoSearchControl = new FormControl('', Validators.required);
       plainSearchControl = new FormControl('', Validators.required);
     
       // Opciones para el autocomplete
@@ -18,25 +19,32 @@ export class HeaderEmpresaComponent {
     
       // Opciones filtradas (observable)
       filteredOptions!: Observable<string[]>;
+
+      constructor(private dialog:MatDialog,
+                        private router:Router){                 
+              }
     
       ngOnInit() {
-        this.filteredOptions = this.autoSearchControl.valueChanges.pipe(
-          startWith(''),
-          map(value => this._filter(value || ''))
-        );
+
       }
     
       // Función para obtener los valores al presionar un botón, por ejemplo:
       obtenerValores(): void {
-        console.log('Valor Autocomplete:', this.autoSearchControl.value);
         console.log('Valor Búsqueda Normal:', this.plainSearchControl.value);
+        if(this.plainSearchControl.value!=null && this.plainSearchControl.value!='') {
+          this.router.navigate(['/'], { 
+            queryParams: { 
+              searchPlain: this.plainSearchControl.value,
+            } 
+          });
+        }else{
+          alert('El campo de busqueda deben estar llenos');
+        }
       }
     
-    
-      private _filter(value: string): string[] {
-        const filterValue = value.toLowerCase();
-        return this.options.filter(option =>
-          option.toLowerCase().includes(filterValue)
-        );
+
+      misTrabajos(){
+        this.router.navigate(['trabajos-empresas']);
       }
+
 }

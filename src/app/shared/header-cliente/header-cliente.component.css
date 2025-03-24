@@ -1,0 +1,14 @@
+/* Si lo pones en styles.css (global) no necesitas ::ng-deep */
+.campo-blanco .mat-form-field-infix {
+    background-color: white !important; /* Fondo del input */
+    color: black !important;
+  }
+  
+  .campo-blanco .mat-input-element {
+    color: black !important; /* Texto que escribe el usuario */
+  }
+  
+  .campo-blanco .mat-form-field-label {
+    color: black !important; /* Etiqueta (placeholder/label) */
+  }
+  
